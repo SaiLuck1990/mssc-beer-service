@@ -14,6 +14,13 @@ import java.util.UUID;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+
+/**
+ * This is a simple controller test using WebMVC
+ * without any mocks since the controller does not have
+ * bean configured to it
+ *
+ */
 @WebMvcTest(BeerController.class)
 public class BeerControllerTest {
 
