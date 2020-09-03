@@ -18,12 +18,12 @@ public class BeerController {
     }
 
     @PostMapping
-    public ResponseEntity saveBeer(@RequestBody /*@Validated*/ BeerDto beerDto){
+    public ResponseEntity saveBeer(@RequestBody @Validated BeerDto beerDto){
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
     @PutMapping("{beerId}")
-    public ResponseEntity updateBeerById(@RequestBody /*@Validated*/ BeerDto beerDto , @PathVariable("beerId") UUID beerId) {
+    public ResponseEntity updateBeerById(@RequestBody @Validated BeerDto beerDto , @PathVariable("beerId") UUID beerId) {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
