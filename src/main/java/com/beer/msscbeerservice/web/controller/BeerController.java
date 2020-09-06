@@ -1,6 +1,9 @@
 package com.beer.msscbeerservice.web.controller;
 
+import com.beer.msscbeerservice.repositories.BeerRepository;
+import com.beer.msscbeerservice.web.mapper.BeerMapper;
 import com.beer.msscbeerservice.web.model.BeerDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -8,22 +11,35 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-@RequestMapping("api/v1/beer")
+@RequiredArgsConstructor
+@RequestMapping("/api/v1/beer")
 @RestController
 public class BeerController {
 
+    private final BeerMapper beerMapper;
+    private final BeerRepository beerRepository;
+
     @GetMapping("/{beerId}")
     public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId) {
-        return new ResponseEntity<>(BeerDto.builder().build() , HttpStatus.OK);
+        return new ResponseEntity<>(beerMapper.beerToBeerDTO(beerRepository.findById(beerId).get()), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity saveBeer(@RequestBody @Validated BeerDto beerDto){
+        beerRepository.save(beerMapper.beerDtoToBeer(beerDto));
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
     @PutMapping("{beerId}")
     public ResponseEntity updateBeerById(@RequestBody @Validated BeerDto beerDto , @PathVariable("beerId") UUID beerId) {
+        beerRepository.findById(beerId).ifPresent(beer -> {
+            beer.setBeerName(beerDto.getBeerName());
+            beer.setBeerStyle(beerDto.getBeerStyle().name());
+            beer.setPrice(beerDto.getPrice());
+            beer.setUpc(beerDto.getUpc());
+
+            beerRepository.save(beer);
+        });
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
