@@ -23,7 +23,7 @@ public class BeerDto {
 
     @JsonProperty("beerId")
     @Null
-    private UUID id;
+    private long id;
 
     @Null
     private Integer version;

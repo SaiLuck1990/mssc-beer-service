@@ -18,7 +18,7 @@ public class BaseTest {
         return  BeerDto.builder()
                 .beerName("BeerName")
                 .beerStyle(BeerStyleEnum.ALE)
-                .id(UUID.randomUUID())
+                .id(1890l)
                 .createdDate(OffsetDateTime.now())
                 .lastModifiedDate(OffsetDateTime.now())
                 .price(new BigDecimal("12.99"))

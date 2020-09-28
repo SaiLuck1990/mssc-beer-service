@@ -19,10 +19,10 @@ import java.util.UUID;
 public class Beer {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID" , strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(length = 36 , columnDefinition = "varchar" , updatable = false , nullable = false)
-    private UUID id;
+    @GeneratedValue/*(generator = "UUID")*/
+    /*@GenericGenerator(name = "UUID" , strategy = "org.hibernate.id.UUIDGenerator")*/
+    @Column(length = 36 , columnDefinition = "varchar(36)" , updatable = false , nullable = false)
+    private long id;
 
     @Version
     private Long version;
