@@ -13,3 +13,7 @@ This is a microservice for mssc-beer-service
 This will get automatically generated in the below path once mvn package is run 
 
 /target/generated-docs/index.html
+
+## Technical Design
+
+This contains SQL connector , JSON Serializer and Deserializer , Error Validations , Bootstrap loader samples 
